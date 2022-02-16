@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base.html}">
+<head>
+    <title>Edit Nurse</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="login-form bg-light mt-4 p-4">
+
+                    <h4>Edit Nurse Record</h4>
+
+                    <form class="row g-3" method="POST" th:action="@{/Nurses/Update}">
+
+                        <input type="hidden" name="id" th:field="${nurse.id}" class="form-control"/>
+                        <input type="hidden" name="createdAt" th:field="${nurse.createdAt}" class="form-control"/>
+
+                        <div class="form-group">
+                            <label for="firstname">First Name</label>
+                            <input type="text"
+                                   name="firstname"
+                                   th:field="${nurse.firstname}"
+                                   id="firstname"
+                                   class="form-control"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastname">Last Name</label>
+                            <input type="text"
+                                   id="lastname"
+                                   th:field="${nurse.lastname}"
+                                   class="form-control"
+                                   name="lastname"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email"
+                                   id="email"
+                                   th:field="${nurse.email}"
+                                   class="form-control"
+                                   name="email"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="text"
+                                   id="phone"
+                                   th:field="${nurse.phone}"
+                                   class="form-control"
+                                   name="phone"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="qualification">Qualification</label>
+                            <input type="text"
+                                   id="qualification"
+                                   th:field="${nurse.qualification}"
+                                   class="form-control"
+                                   name="qualification"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dateJoined">Date Joined</label>
+                            <input type="date"
+                                   id="dateJoined"
+                                   class="form-control"
+                                   th:field="${nurse.dateJoined}"
+                                   name="dateJoined"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="departmentId">Department</label>
+                            <select class="form-select"
+                                    name="departmentId"
+                                    id="departmentId">
+                                <option th:each="department : ${departments}"
+                                        th:value="${department.id}"
+                                        th:text="${department.name}">
+                                </option>
+                            </select>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="isActive">Active</label>
+                            <select class="form-select"
+                                    name="isActive"
+                                    id="isActive">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <button class="btn btn-primary btn-block" type="submit">Update Nurse Record</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

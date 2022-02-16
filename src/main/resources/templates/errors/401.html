@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="shortcut icon" href="assets/ico/favicon.ico"/>
+
+    <title>Management System</title>
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet"/>
+
+    <style>
+        .container {
+            justify-content: center;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="container">
+    <h1 style="font-size: 40px; text-align: center">Page Unauthorized!</h1>
+    <p>Something went wrong, We are working on it</p>
+    <a th:href="@{/home}" class="btn btn-primary">Go Home</a>
+</div>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{fontawesome/js/all.js}"></script>
+
+</body>
+</html>

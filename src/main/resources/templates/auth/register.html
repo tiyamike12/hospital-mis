@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="shortcut icon" href="assets/ico/favicon.ico"/>
+
+    <title>Management System</title>
+
+    <link th:href="@{../css/bootstrap.min.css}" rel="stylesheet"/>
+
+    <style>
+        a {
+            color: whitesmoke;
+        }
+
+        .navbar-nav > .nav-item > .nav-link {
+            color: whitesmoke;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="login-form bg-light mt-4 p-4">
+
+                <h5 class="text-center mt-5 mb-3">Hospital Management System</h5>
+
+                <p>Sign Up</p>
+                <form class="row g-3" method="POST" th:action="@{/Auth/Add}" th:object="${appUser}">
+                    <h4>Create your account</h4>
+
+                    <div class="form-group">
+                        <label for="firstname">First Name</label>
+                        <input type="text"
+                               th:field="*{firstname}"
+                               id="firstname"
+                               placeholder="First name"
+                               class="form-control"/>
+                        <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"
+                              th:if="${#fields.hasErrors('firstname')}"
+                              th:errors="*{firstname}">Name error
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastname">Last Name</label>
+                        <input type="text"
+                               id="lastname"
+                               class="form-control"
+                               th:field="*{lastname}"
+                               placeholder="Last name"/>
+                        <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"
+                              th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Name error</span>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text"
+                               id="username"
+                               class="form-control"
+                               th:field="*{username}"
+                               placeholder="Username"/>
+                        <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"
+                              th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</span>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email"
+                               id="email"
+                               class="form-control"
+                               th:field="*{email}"
+                               placeholder="Email"/>
+                        <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"
+                              th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name error</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password"
+                               id="password"
+                               class="form-control"
+                               th:field="*{password}"
+                               placeholder="Password"/>
+                        <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"
+                              th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name error</span>
+
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <button class="btn btn-primary btn-block" type="submit">Sign up</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{../js/bootstrap.bundle.min.js}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base.html}">
+<head>
+    <title>Users</title>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <div class="container mt-md-5">
+        <div class="row justify-content-center mb-2">
+            <div class="col">
+                <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
+                <h3 class="float-start">Users</h3>
+                <a class="btn btn-success float-end" role="button" th:href="@{/Users/Create}">Add User</a>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col">
+                <table class="table table-bordered mt-2" id="table">
+                    <thead>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user:${users}">
+                        <td th:text="${user.firstname}">Id</td>
+                        <td th:text="${user.lastname}">Date In</td>
+                        <td th:text="${user.username}">Time Out</td>
+                        <td th:text="${user.email}">Time Out</td>
+                        <td>
+                            <a class="btn btn-warning" th:href="@{'/Users/Edit/' + ${user.id}}">Edit</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" th:href="@{'/Users/Delete/' + ${user.id}}">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

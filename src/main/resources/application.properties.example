@@ -1,0 +1,21 @@
+# Database Connection
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
+#spring.jpa.hibernate.ddl-auto=update
+spring.jpa.hibernate.naming.implicit-strategy=org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+spring.datasource.url=jdbc:postgresql://{databaseUrlHere}
+spring.datasource.username={databaseUser}
+spring.datasource.password={databasePassword}
+
+# Flyway Migration settings
+#flyway.baseline-on-migrate=true #used if database has some already table
+flyway.enabled=true
+flyway.url=jdbc:postgresql://{databaseUrlHere}
+flyway.user=root
+flyway.password=
+
+server.error.whitelabel.enabled=false
+server.error.path=/error
+
+

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base.html}">
+<head>
+    <title>Nurses</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="login-form bg-light mt-4 p-4">
+
+                    <h4>Create a Nurse Record</h4>
+
+                    <form class="row g-3" method="POST" th:action="@{/Nurses/Add}">
+
+                        <div class="form-group">
+                            <label for="firstname">First Name</label>
+                            <input type="text"
+                                   name="firstname"
+                                   id="firstname"
+                                   placeholder="First name"
+                                   class="form-control"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastname">Last Name</label>
+                            <input type="text"
+                                   id="lastname"
+                                   class="form-control"
+                                   name="lastname"
+                                   placeholder="Last name"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email"
+                                   id="email"
+                                   class="form-control"
+                                   name="email"
+                                   placeholder="Email"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="text"
+                                   id="phone"
+                                   class="form-control"
+                                   name="phone"
+                                   placeholder="Phone"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="qualification">Qualification</label>
+                            <input type="text"
+                                   id="qualification"
+                                   class="form-control"
+                                   name="qualification"
+                                   placeholder="Qualification"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dateJoined">Date Joined</label>
+                            <input type="date"
+                                   id="dateJoined"
+                                   class="form-control"
+                                   name="dateJoined"
+                                   placeholder="Joined"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="departmentId">Department</label>
+                            <select class="form-select"
+                                    name="departmentId"
+                                    id="departmentId">
+                                <option th:each="department : ${departments}"
+                                        th:value="${department.id}"
+                                        th:text="${department.name}">
+                                </option>
+                            </select>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="isActive">Active</label>
+                            <select class="form-select"
+                                    name="isActive"
+                                    id="isActive">
+                                <option th:value="true">Yes</option>
+                                <option th:value="false">No</option>
+                            </select>
+
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <button class="btn btn-primary btn-block" type="submit">Add Nurse</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
