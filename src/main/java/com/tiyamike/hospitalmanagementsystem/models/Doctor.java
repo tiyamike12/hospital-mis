@@ -36,6 +36,6 @@ public class Doctor {
     @ManyToOne
     @JoinColumn(name = "departmentId", insertable = false, updatable = false)
     private Department department;
-    private boolean isActive;
+    private Boolean isActive;
     private Instant createdAt;
 }

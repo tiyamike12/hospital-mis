@@ -35,13 +35,13 @@
                     </thead>
                     <tbody>
                     <tr th:each="patient:${patients}">
-                        <td th:text="${patient.firstname} + ${patient.lastname}"></td>
+                        <td th:text="${patient.firstname} + ' ' + ${patient.lastname}"></td>
                         <td th:text="${patient.gender}"></td>
-                        <td th:text="${patient.dateOfBirth}"></td>
+                        <td th:text="${#dates.format(patient.dateOfBirth, 'dd-MM-yyyy')}"></td>
                         <td th:text="${patient.phone}"></td>
                         <td th:text="${patient.email}"></td>
                         <td th:text="${patient.address}"></td>
-                        <td th:text="${patient.createdAt}"></td>
+                        <td th:text="${#dates.format(patient.createdAt, 'dd-MM-yyyy')}"></td>
                         <td>
                             <a class="btn btn-info" th:href="@{'/Patients/Edit/' + ${patient.id}}">Edit</a>
                         </td>

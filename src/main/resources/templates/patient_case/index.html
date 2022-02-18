@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base.html}">
+<head>
+    <title>Patient Cases</title>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <div class="container mt-md-5">
+        <div class="row justify-content-center mb-2">
+            <div class="col">
+                <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
+                <h3 class="float-start">Patient Cases</h3>
+                <a class="btn btn-success float-end" role="button" th:href="@{/PatientCases/Create}">Add Patient Case Record</a>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col">
+                <table class="table table-bordered table-striped mt-2" id="table">
+                    <thead>
+                    <tr>
+                        <th>Diagnosis</th>
+                        <th>Case Date</th>
+                        <th>Patient Name</th>
+                        <th>Treatment</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="patientCase:${patientCases}">
+                        <td th:text="${patientCase.diagnosis}"></td>
+                        <td th:text="${#dates.format(patientCase.caseDate, 'dd-MM-yyyy')}"></td>
+                        <td th:text="${patientCase.patient.firstname} + ' ' + ${patientCase.patient.lastname}"></td>
+                        <td th:text="${patientCase.treatment}"></td>
+                        <td>
+                            <a class="btn btn-info" th:href="@{'/PatientCases/Edit/' + ${patientCase.id}}">Edit</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" th:href="@{'/PatientCases/Delete/' + ${patientCase.id}}">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

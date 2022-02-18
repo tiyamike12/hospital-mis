@@ -50,6 +50,19 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="maritalStatus">Marital Status</label>
+                            <select class="form-select"
+                                    name="maritalStatus"
+                                    id="maritalStatus">
+                                <option th:each="maritalStatus : ${maritalStatuses}"
+                                        th:value="${maritalStatus}"
+                                        th:text="${maritalStatus}">
+                                </option>
+                            </select>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
                             <label for="dateOfBirth">Date of Birth</label>
                             <input type="date"
                                    id="dateOfBirth"
@@ -86,6 +99,26 @@
                                    class="form-control"
                                    name="address"
                                    placeholder="Address"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nextOfKinName">Next of Kin Name</label>
+                            <input type="text"
+                                   id="nextOfKinName"
+                                   class="form-control"
+                                   name="nextOfKinName"
+                                   placeholder="Next of Kin Name"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nextOfKinPhone">Next of Kin Phone</label>
+                            <input type="text"
+                                   id="nextOfKinPhone"
+                                   class="form-control"
+                                   name="nextOfKinPhone"
+                                   placeholder="Next of Kin Phone"/>
                             <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
                         </div>
 

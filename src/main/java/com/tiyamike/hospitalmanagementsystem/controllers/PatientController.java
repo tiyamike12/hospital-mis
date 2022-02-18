@@ -1,6 +1,7 @@
 package com.tiyamike.hospitalmanagementsystem.controllers;
 
 import com.tiyamike.hospitalmanagementsystem.models.Gender;
+import com.tiyamike.hospitalmanagementsystem.models.MaritalStatus;
 import com.tiyamike.hospitalmanagementsystem.models.Patient;
 import com.tiyamike.hospitalmanagementsystem.services.PatientService;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,7 @@ public class PatientController {
     @GetMapping("/Create")
     public String addPatient(Model model){
         model.addAttribute("gender", Gender.values());
+        model.addAttribute("maritalStatuses", MaritalStatus.values());
         return "patient/create";
     }
 
@@ -45,6 +47,8 @@ public class PatientController {
     @GetMapping("/Edit/{id}")
     public String editPatient(Model model, @PathVariable("id") long id){
         Optional<Patient> patient = patientService.findById(id);
+        model.addAttribute("gender", Gender.values());
+        model.addAttribute("maritalStatuses", MaritalStatus.values());
         model.addAttribute("patient", patient);
         return "patient/edit";
     }

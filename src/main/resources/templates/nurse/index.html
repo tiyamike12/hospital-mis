@@ -35,13 +35,16 @@
                     </thead>
                     <tbody>
                     <tr th:each="nurse:${nurses}">
-                        <td th:text="${nurse.firstname} + ${nurse.lastname}"></td>
+                        <td th:text="${nurse.firstname} + ' ' + ${nurse.lastname}"></td>
                         <td th:text="${nurse.department.name}"></td>
                         <td th:text="${nurse.qualification}"></td>
                         <td th:text="${nurse.phone}"></td>
                         <td th:text="${nurse.email}"></td>
-                        <td th:text="${nurse.isActive}"></td>
-                        <td th:text="${nurse.dateJoined}"></td>
+                        <td>
+                            <span th:if="${nurse.isActive}" class="badge bg-success">Active</span>
+                            <span th:unless="${nurse.isActive}" class="badge bg-danger">Inactive</span>
+                        </td>
+                        <td th:text="${#dates.format(nurse.dateJoined, 'dd-MM-yyyy')}"></td>
                         <td>
                             <a class="btn btn-info" th:href="@{'/Nurses/Edit/' + ${nurse.id}}">Edit</a>
                         </td>

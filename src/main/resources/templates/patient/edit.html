@@ -45,9 +45,22 @@
                             <select class="form-select"
                                     name="gender"
                                     id="gender">
-                                <option th:each="department : ${departments}"
-                                        th:value="${department.id}"
-                                        th:text="${department.name}">
+                                <option th:each="gender : ${gender}"
+                                        th:value="${gender.name}"
+                                        th:text="${gender.name}">
+                                </option>
+                            </select>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="maritalStatus">Marital Status</label>
+                            <select class="form-select"
+                                    name="maritalStatus"
+                                    id="maritalStatus">
+                                <option th:each="maritalStatus : ${maritalStatuses}"
+                                        th:value="${maritalStatus}"
+                                        th:text="${maritalStatus}">
                                 </option>
                             </select>
                             <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
@@ -90,6 +103,26 @@
                                    th:field="${patient.address}"
                                    class="form-control"
                                    name="address"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nextOfKinName">Next of Kin Name</label>
+                            <input type="text"
+                                   id="nextOfKinName"
+                                   th:field="${patient.nextOfKinName}"
+                                   class="form-control"
+                                   name="nextOfKinName"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nextOfKinPhone">Next of Kin Phone</label>
+                            <input type="text"
+                                   id="nextOfKinPhone"
+                                   th:field="${patient.nextOfKinPhone}"
+                                   class="form-control"
+                                   name="nextOfKinPhone"/>
                             <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
                         </div>
 

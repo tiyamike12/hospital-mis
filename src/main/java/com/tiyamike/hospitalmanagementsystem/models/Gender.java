@@ -4,6 +4,6 @@ public enum Gender {
     MALE("male"),
     FEMALE("female");
 
-    Gender(String name) {
+    Gender(String name){
     }
 }

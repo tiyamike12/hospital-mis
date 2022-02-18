@@ -32,10 +32,10 @@
                     </thead>
                     <tbody>
                     <tr th:each="user:${users}">
-                        <td th:text="${user.firstname}">Id</td>
-                        <td th:text="${user.lastname}">Date In</td>
-                        <td th:text="${user.username}">Time Out</td>
-                        <td th:text="${user.email}">Time Out</td>
+                        <td th:text="${user.firstname}"></td>
+                        <td th:text="${user.lastname}"></td>
+                        <td th:text="${user.username}"></td>
+                        <td th:text="${user.email}"></td>
                         <td>
                             <a class="btn btn-warning" th:href="@{'/Users/Edit/' + ${user.id}}">Edit</a>
                         </td>

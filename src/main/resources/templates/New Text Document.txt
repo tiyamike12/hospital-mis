@@ -1,0 +1,6 @@
+patient- maritalstats
+occupation
+
+spouse name
+nextofkin /Emerge contact
+phone

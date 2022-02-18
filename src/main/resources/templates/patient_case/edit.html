@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base.html}">
+<head>
+    <title>Edit Patient Case</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="login-form bg-light mt-4 p-4">
+
+                    <h4>Edit Patient Case Record</h4>
+
+                    <form class="row g-3" method="POST" th:action="@{/PatientCases/Update}">
+
+                        <input type="hidden" name="id" th:field="${patientCase.id}" class="form-control"/>
+                        <input type="hidden" name="createdAt" th:field="${patientCase.createdAt}" class="form-control"/>
+
+                        <div class="form-group">
+                            <label for="diagnosis">Diagnosis</label>
+                            <input type="text"
+                                   name="diagnosis"
+                                   id="diagnosis"
+                                   th:field="${patientCase.diagnosis}"
+                                   class="form-control"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="caseDate">Case Date</label>
+                            <input type="date"
+                                   id="caseDate"
+                                   class="form-control"
+                                   th:field="${patientCase.caseDate}"
+                                   name="caseDate"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="patientId">Patient</label>
+                            <select class="form-select"
+                                    name="patientId"
+                                    id="patientId">
+                                <option th:each="patient : ${patients}"
+                                        th:value="${patient.id}"
+                                        th:text="${patient.firstname} + ' ' + ${patient.lastname}">
+                                </option>
+                            </select>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="treatment">Treatment</label>
+                            <input type="text"
+                                   id="treatment"
+                                   class="form-control"
+                                   name="treatment"
+                                   th:field="${patientCase.treatment}"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <button class="btn btn-primary btn-block" type="submit">Update Patient Case Record</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

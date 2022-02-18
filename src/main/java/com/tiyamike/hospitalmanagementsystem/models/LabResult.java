@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.Instant;
 import java.util.Date;
 
@@ -13,23 +14,21 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "patients")
-public class Patient {
+@Table(name = "lab_results")
+public class LabResult {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String firstname;
-    private String lastname;
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
+    @NotBlank(message = "Test name is required")
+    private String testName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateOfBirth;
-    private String phone;
-    private String email;
-    private String address;
-    @Enumerated(EnumType.STRING)
-    private MaritalStatus maritalStatus;
-    private String nextOfKinName;
-    private String nextOfKinPhone;
+    private Date testDate;
+    @NotBlank(message = "Conducted By is required")
+    private String conductedBy;
+    private long patientId;
+    @ManyToOne
+    @JoinColumn(name = "patientId", insertable = false, updatable = false)
+    private Patient patient;
+    private Boolean result;
     private Instant createdAt;
 }

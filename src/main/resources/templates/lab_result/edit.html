@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base.html}">
+<head>
+    <title>Edit Lab Result</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="login-form bg-light mt-4 p-4">
+
+                    <h4>Edit Lab Result</h4>
+
+                    <form class="row g-3" method="POST" th:action="@{/LabResults/Update}">
+
+                        <input type="hidden" name="id" th:field="${labResult.id}" class="form-control"/>
+                        <input type="hidden" name="createdAt" th:field="${labResult.createdAt}" class="form-control"/>
+
+                        <div class="form-group">
+                            <label for="testName">Test Name</label>
+                            <input type="text"
+                                   name="testName"
+                                   id="testName"
+                                   th:field="${labResult.testName}"
+                                   class="form-control"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="testDate">Test Date</label>
+                            <input type="date"
+                                   id="testDate"
+                                   class="form-control"
+                                   name="testDate"
+                                   th:field="${labResult.testDate}"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="conductedBy">Conducted By</label>
+                            <input type="text"
+                                   id="conductedBy"
+                                   class="form-control"
+                                   name="conductedBy"
+                                   th:field="${labResult.conductedBy}"/>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="patientId">Patient</label>
+                            <select class="form-select"
+                                    name="patientId"
+                                    id="patientId">
+                                <option th:each="patient : ${patients}"
+                                        th:value="${patient.id}"
+                                        th:text="${patient.firstname} + ' ' + ${patient.lastname}">
+                                </option>
+                            </select>
+                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="result">Result</label>
+                            <select class="form-select"
+                                    name="result"
+                                    id="result">
+                                <option th:value="true">Positive</option>
+                                <option th:value="false">Negative</option>
+                            </select>
+
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <button class="btn btn-primary btn-block" type="submit">Update Lab Result</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
