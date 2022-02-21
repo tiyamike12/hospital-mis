@@ -6,9 +6,11 @@ import com.tiyamike.hospitalmanagementsystem.services.DepartmentService;
 import com.tiyamike.hospitalmanagementsystem.services.DoctorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,14 +34,17 @@ public class DoctorController {
     }
 
     @GetMapping("/Create")
-    public String addDoctor(Model model){
+    public String addDoctor(Doctor doctor, Model model){
         List<Department> departmentList = departmentService.getDepartments();
         model.addAttribute("departments", departmentList);
         return "doctor/create";
     }
 
     @PostMapping("/Add")
-    public String saveDoctor(Doctor doctor, RedirectAttributes redirectAttributes){
+    public String saveDoctor(@Valid Doctor doctor, Errors errors, RedirectAttributes redirectAttributes){
+        if (errors.hasErrors()){
+            return "doctor/create";
+        }
         doctorService.saveDoctor(doctor);
         redirectAttributes.addFlashAttribute("message", "Doctor was created successfully!");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");
@@ -56,7 +61,14 @@ public class DoctorController {
     }
 
     @PostMapping("/Update")
-    public String updateDoctor(Doctor doctor, RedirectAttributes redirectAttributes){
+    public String updateDoctor(@Valid Doctor doctor, Errors errors,
+                               RedirectAttributes redirectAttributes,
+                               Model model){
+        if (errors.hasErrors()){
+            List<Department> departmentList = departmentService.getDepartments();
+            model.addAttribute("departments", departmentList);
+            return "doctor/edit";
+        }
         doctorService.updateDoctor(doctor);
         redirectAttributes.addFlashAttribute("message", "Doctor was updated successfully!");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");

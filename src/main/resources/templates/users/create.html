@@ -7,66 +7,68 @@
 </head>
 <body>
 <section layout:fragment="content">
-    <div class="container">
+    <div class="container px-4 mt-4">
+        <div class="row justify-content-center mb-2">
+            <div class="col">
+                <a class="btn btn-success float-end" role="button" th:href="@{/Users/All}">Users</a>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="login-form bg-light mt-4 p-4">
-
-                    <h4>Create an account</h4>
-
-                    <form class="row g-3" method="POST" th:action="@{/Users/Add}">
-
-                        <div class="form-group">
-                            <label for="firstname">First Name</label>
-                            <input type="text"
-                                   name="firstname"
-                                   id="firstname"
-                                   placeholder="First name"
-                                   class="form-control"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+            <div class="card mb-4">
+                <div class="card-header">Create Account</div>
+                <div class="card-body">
+                    <form method="POST" th:action="@{/Users/Add}" th:object="${appUser}">
+                        <!-- Form Group (username)-->
+                        <div class="mb-3">
+                            <label class="small mb-1">Username</label>
+                            <input class="form-control"
+                                   th:field="${appUser.username}"
+                                   type="text"
+                                   placeholder="Enter your username"/>
+                            <span class="invalid" th:errors="${appUser.username}"></span>
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1">First name</label>
+                                <input class="form-control"
+                                       th:field="${appUser.firstname}"
+                                       type="text"
+                                       placeholder="Enter your first name"/>
+                                <span class="invalid" th:errors="${appUser.firstname}"></span>
+                            </div>
+                            <!-- Form Group (last name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1">Last name</label>
+                                <input class="form-control"
+                                       th:field="${appUser.lastname}"
+                                       type="text"
+                                       placeholder="Enter your last name"/>
+                                <span class="invalid" th:errors="${appUser.lastname}"></span>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="lastname">Last Name</label>
-                            <input type="text"
-                                   id="lastname"
-                                   class="form-control"
-                                   name="lastname"
-                                   placeholder="Last name"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
-
+                        <!-- Form Group (email address)-->
+                        <div class="mb-3">
+                            <label class="small mb-1">Email address</label>
+                            <input class="form-control"
+                                   th:field="${appUser.email}"
+                                   type="email"
+                                   placeholder="Enter your email address"/>
+                            <span class="invalid" th:errors="${appUser.email}"></span>
                         </div>
 
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text"
-                                   id="username"
-                                   class="form-control"
-                                   name="username"
-                                   placeholder="Username"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
-
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email"
-                                   id="email"
-                                   class="form-control"
-                                   name="email"
-                                   placeholder="Email"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
-                        </div>
-
+                        <!-- Save changes button-->
                         <div class="form-group mt-2">
-                            <button class="btn btn-primary btn-block" type="submit">Add User</button>
+                            <button class="btn btn-primary" type="submit">Save User</button>
                         </div>
-
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 </section>
 
 </body>

@@ -4,9 +4,11 @@ import com.tiyamike.hospitalmanagementsystem.models.Department;
 import com.tiyamike.hospitalmanagementsystem.services.DepartmentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,12 +30,18 @@ public class DepartmentController {
     }
 
     @GetMapping("/Create")
-    public String addDepartment(){
+    public String addDepartment(Department department){
         return "department/create";
     }
 
     @PostMapping("/Add")
-    public String saveDepartment(Department department, RedirectAttributes redirectAttributes){
+    public String saveDepartment(@Valid Department department, Errors errors,
+                                 Model model, RedirectAttributes redirectAttributes){
+        if (errors.hasErrors()){
+            List<Department> departmentList = departmentService.getDepartments();
+            model.addAttribute("departments", departmentList);
+            return "department/create";
+        }
         departmentService.saveDepartment(department);
         redirectAttributes.addFlashAttribute("message", "Department was created successfully!");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");
@@ -48,7 +56,10 @@ public class DepartmentController {
     }
 
     @PostMapping("/Update")
-    public String updateDepartment(Department department, RedirectAttributes redirectAttributes){
+    public String updateDepartment(@Valid Department department, Errors errors, RedirectAttributes redirectAttributes){
+        if (errors.hasErrors()){
+            return "department/edit";
+        }
         departmentService.updateDepartment(department);
         redirectAttributes.addFlashAttribute("message", "Department was updated successfully!");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");

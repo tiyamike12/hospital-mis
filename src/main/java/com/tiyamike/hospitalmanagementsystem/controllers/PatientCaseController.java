@@ -7,9 +7,11 @@ import com.tiyamike.hospitalmanagementsystem.services.PatientCaseService;
 import com.tiyamike.hospitalmanagementsystem.services.PatientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,14 +34,21 @@ public class PatientCaseController {
     }
 
     @GetMapping("/Create")
-    public String addPatientCase(Model model){
+    public String addPatientCase(PatientCase patientCase, Model model){
         List<Patient> patientList = patientService.getPatients();
         model.addAttribute("patients", patientList);
         return "patient_case/create";
     }
 
     @PostMapping("/Add")
-    public String savePatientCase(PatientCase patientCase, RedirectAttributes redirectAttributes){
+    public String savePatientCase(@Valid PatientCase patientCase, Errors errors,
+                                  RedirectAttributes redirectAttributes,
+                                  Model model){
+        if (errors.hasErrors()){
+            List<Patient> patientList = patientService.getPatients();
+            model.addAttribute("patients", patientList);
+            return "patient_case/create";
+        }
         patientCaseService.savePatientCase(patientCase);
         redirectAttributes.addFlashAttribute("message", "Patient Case was created successfully!");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");
@@ -56,7 +65,11 @@ public class PatientCaseController {
     }
 
     @PostMapping("/Update")
-    public String updatePatientCase(PatientCase patientCase, RedirectAttributes redirectAttributes){
+    public String updatePatientCase(@Valid PatientCase patientCase, Errors errors,
+                                    RedirectAttributes redirectAttributes){
+        if (errors.hasErrors()){
+            return "patient_case/edit";
+        }
         patientCaseService.updatePatientCase(patientCase);
         redirectAttributes.addFlashAttribute("message", "Patient Case was updated successfully!");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");

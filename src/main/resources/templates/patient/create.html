@@ -7,36 +7,40 @@
 </head>
 <body>
 <section layout:fragment="content">
-    <div class="container">
+    <div class="container px-4 mt-4">
+        <div class="row justify-content-center mb-2">
+            <div class="col">
+                <a class="btn btn-success float-end" role="button" th:href="@{/Patients/All}">Patients</a>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="login-form bg-light mt-4 p-4">
+            <div class="card mb-4">
+                <div class="card-header">Create Patient Record</div>
+                <div class="card-body">
+                    <form method="POST" th:action="@{/Patients/Add}" th:object="${patient}">
 
-                    <h4>Create a Patient Record</h4>
-
-                    <form class="row g-3" method="POST" th:action="@{/Patients/Add}">
-
-                        <div class="form-group">
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-5">
                             <label for="firstname">First Name</label>
                             <input type="text"
                                    name="firstname"
                                    id="firstname"
                                    placeholder="First name"
                                    class="form-control"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${patient.firstname}"></span>
                         </div>
 
-                        <div class="form-group">
-                            <label for="lastname">Last Name</label>
+                            <div class="col-md-5">
+                                <label for="lastname">Last Name</label>
                             <input type="text"
                                    id="lastname"
                                    class="form-control"
                                    name="lastname"
                                    placeholder="Last name"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${patient.lastname}"></span>
                         </div>
 
-                        <div class="form-group">
+                            <div class="col-md-2">
                             <label for="gender">Gender</label>
                             <select class="form-select"
                                     name="gender"
@@ -46,11 +50,12 @@
                                         th:text="${gender.name}">
                                 </option>
                             </select>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="maritalStatus">Marital Status</label>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-3">
+                                <label for="maritalStatus">Marital Status</label>
                             <select class="form-select"
                                     name="maritalStatus"
                                     id="maritalStatus">
@@ -59,67 +64,71 @@
                                         th:text="${maritalStatus}">
                                 </option>
                             </select>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
                         </div>
 
-                        <div class="form-group">
+                            <div class="col-md-3">
                             <label for="dateOfBirth">Date of Birth</label>
                             <input type="date"
                                    id="dateOfBirth"
                                    class="form-control"
                                    name="dateOfBirth"
                                    placeholder="Date of Birth"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${patient.dateOfBirth}"></span>
                         </div>
 
-                        <div class="form-group">
-                            <label for="email">Email</label>
+                            <div class="col-md-6">
+                                <label for="email">Email</label>
                             <input type="email"
                                    id="email"
                                    class="form-control"
                                    name="email"
                                    placeholder="Email"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${patient.email}"></span>
+                        </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
                             <label for="phone">Phone</label>
                             <input type="text"
                                    id="phone"
                                    class="form-control"
                                    name="phone"
                                    placeholder="Phone"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${patient.phone}"></span>
                         </div>
 
-                        <div class="form-group">
+                            <div class="col-md-6">
                             <label for="address">Address</label>
                             <input type="text"
                                    id="address"
                                    class="form-control"
                                    name="address"
                                    placeholder="Address"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${patient.address}"></span>
+                        </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="row gx-3 mb-3">
+                        <div class="col-md-6">
                             <label for="nextOfKinName">Next of Kin Name</label>
                             <input type="text"
                                    id="nextOfKinName"
                                    class="form-control"
                                    name="nextOfKinName"
                                    placeholder="Next of Kin Name"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                            <span class="invalid" th:errors="${patient.nextOfKinName}"></span>
                         </div>
 
-                        <div class="form-group">
+                        <div class="col-md-6">
                             <label for="nextOfKinPhone">Next of Kin Phone</label>
                             <input type="text"
                                    id="nextOfKinPhone"
                                    class="form-control"
                                    name="nextOfKinPhone"
                                    placeholder="Next of Kin Phone"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                            <span class="invalid" th:errors="${patient.nextOfKinPhone}"></span>
+                        </div>
                         </div>
 
                         <div class="form-group mt-2">

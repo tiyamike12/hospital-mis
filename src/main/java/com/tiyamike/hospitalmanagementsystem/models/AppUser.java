@@ -24,7 +24,6 @@ public class AppUser {
     private String username;
     @Email(message = "Invalid Email")
     private String email;
-    @NotBlank(message = "Password is required")
     private String password;
     @NotNull
     @Size(min = 4, max = 30)

@@ -7,67 +7,71 @@
 </head>
 <body>
 <section layout:fragment="content">
-    <div class="container">
+    <div class="container px-4 mt-4">
+        <div class="row justify-content-center mb-2">
+            <div class="col">
+                <a class="btn btn-success float-end" role="button" th:href="@{/LabResults/All}">Lab Results</a>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="login-form bg-light mt-4 p-4">
+            <div class="card mb-4">
+                <div class="card-header">Create Lab Result Record</div>
+                <div class="card-body">
+                    <form method="POST" th:action="@{/LabResults/Add}" th:object="${labResult}">
 
-                    <h4>Create a Lab Result Record</h4>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="testName">Test Name</label>
+                                <input type="text"
+                                       name="testName"
+                                       id="testName"
+                                       placeholder="Test name"
+                                       class="form-control"/>
+                                <span class="invalid" th:errors="${labResult.testName}"></span>
+                            </div>
 
-                    <form class="row g-3" method="POST" th:action="@{/LabResults/Add}">
-
-                        <div class="form-group">
-                            <label for="testName">Test Name</label>
-                            <input type="text"
-                                   name="testName"
-                                   id="testName"
-                                   placeholder="Test name"
-                                   class="form-control"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                            <div class="col-md-6">
+                                <label for="testDate">Test Date</label>
+                                <input type="date"
+                                       id="testDate"
+                                       class="form-control"
+                                       name="testDate"/>
+                                <span th:errors="${labResult.testDate}"></span>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="testDate">Test Date</label>
-                            <input type="date"
-                                   id="testDate"
-                                   class="form-control"
-                                   name="testDate"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
-                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-4">
+                                <label for="conductedBy">Conducted By</label>
+                                <input type="text"
+                                       id="conductedBy"
+                                       class="form-control"
+                                       name="conductedBy"
+                                       placeholder="Conducted By"/>
+                                <span class="invalid" th:errors="${labResult.conductedBy}"></span>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="conductedBy">Conducted By</label>
-                            <input type="text"
-                                   id="conductedBy"
-                                   class="form-control"
-                                   name="conductedBy"
-                                   placeholder="Conducted By"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                            <div class="col-md-5">
+                                <label for="patientId">Patient</label>
+                                <select class="form-select"
+                                        name="patientId"
+                                        id="patientId">
+                                    <option th:each="patient : ${patients}"
+                                            th:value="${patient.id}"
+                                            th:text="${patient.firstname} + ' ' + ${patient.lastname}">
+                                    </option>
+                                </select>
+                            </div>
 
-                        </div>
-
-                        <div class="form-group">
-                            <label for="patientId">Patient</label>
-                            <select class="form-select"
-                                    name="patientId"
-                                    id="patientId">
-                                <option th:each="patient : ${patients}"
-                                        th:value="${patient.id}"
-                                        th:text="${patient.firstname} + ' ' + ${patient.lastname}">
-                                </option>
-                            </select>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="result">Result</label>
-                            <select class="form-select"
-                                    name="result"
-                                    id="result">
-                                <option th:value="true">Positive</option>
-                                <option th:value="false">Negative</option>
-                            </select>
-
+                            <div class="col-md-3">
+                                <label for="result">Result</label>
+                                <select class="form-select"
+                                        name="result"
+                                        id="result">
+                                    <option th:value="true">Positive</option>
+                                    <option th:value="false">Negative</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="form-group mt-2">

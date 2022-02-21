@@ -7,48 +7,44 @@
 </head>
 <body>
 <section layout:fragment="content">
-
-    <div class="container mt-2">
-        <div class="row justify-content-center mb-2">
-            <div class="col-md-10">
+    <div class="container-xl px-4 mt-4">
+        <div class="row mb-2">
+            <div class="col">
                 <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
-                <h4 class="float-start">Departments</h4>
-                <a class="btn btn-success float-end" role="button" th:href="@{/Departments/Create}">Add Department</a>
+                <a class="btn btn-success float-end" role="button" th:href="@{/Departments/Create}">Add Departments</a>
             </div>
         </div>
-
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <table class="table table-bordered mt-2" id="table">
-                    <thead>
-                    <tr>
-                        <th>Code</th>
-                        <th>Department</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="department:${departments}">
-                        <td th:text="${department.code}">Id</td>
-                        <td th:text="${department.name}">Date In</td>
-
-                        <td>
-                            <a class="btn btn-warning" th:href="@{'/Departments/Edit/' + ${department.id}}">Edit</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-danger" th:href="@{'/Departments/Delete/' + ${department.id}}">Delete</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+        <div class="row" style="margin: auto">
+            <div class="card mb-4">
+                <div class="card-header">Departments</div>
+                <div class="card-body table-responsive">
+                    <table class="table table-bordered mt-2" id="table">
+                        <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Department</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="department:${departments}">
+                            <td th:text="${department.code}"></td>
+                            <td th:text="${department.name}"></td>
+                            <td>
+                                <a class="btn btn-outline-info" th:href="@{'/Departments/Edit/' + ${department.id}}">Edit</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger"
+                                   th:href="@{'/Departments/Delete/' + ${department.id}}">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-
-
 </section>
-
-
 </body>
 </html>

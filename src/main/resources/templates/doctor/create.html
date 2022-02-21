@@ -7,77 +7,84 @@
 </head>
 <body>
 <section layout:fragment="content">
-    <div class="container">
+    <div class="container px-4 mt-4">
+        <div class="row justify-content-center mb-2">
+            <div class="col">
+                <a class="btn btn-success float-end" role="button" th:href="@{/Doctors/All}">Doctors</a>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="login-form bg-light mt-4 p-4">
+            <div class="card mb-4">
+                <div class="card-header">Create Doctor Record</div>
+                <div class="card-body">
+                    <form method="POST" th:action="@{/Doctors/Add}" th:object="${doctor}">
 
-                    <h4>Create a Doctor Record</h4>
-
-                    <form class="row g-3" method="POST" th:action="@{/Doctors/Add}">
-
-                        <div class="form-group">
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
                             <label for="firstname">First Name</label>
                             <input type="text"
                                    name="firstname"
                                    id="firstname"
                                    placeholder="First name"
                                    class="form-control"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${doctor.firstname}"></span>
                         </div>
 
-                        <div class="form-group">
+                            <div class="col-md-6">
                             <label for="lastname">Last Name</label>
                             <input type="text"
                                    id="lastname"
                                    class="form-control"
                                    name="lastname"
                                    placeholder="Last name"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
-
+                                <span class="invalid" th:errors="${doctor.lastname}"></span>
+                            </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-4">
                             <label for="email">Email</label>
                             <input type="email"
                                    id="email"
                                    class="form-control"
                                    name="email"
                                    placeholder="Email"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${doctor.email}"></span>
                         </div>
 
-                        <div class="form-group">
+                            <div class="col-md-4">
                             <label for="phone">Phone</label>
                             <input type="text"
                                    id="phone"
                                    class="form-control"
                                    name="phone"
                                    placeholder="Phone"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${doctor.phone}"></span>
                         </div>
 
-                        <div class="form-group">
+                            <div class="col-md-4">
                             <label for="qualification">Qualification</label>
                             <input type="text"
                                    id="qualification"
                                    class="form-control"
                                    name="qualification"
                                    placeholder="Qualification"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${doctor.qualification}"></span>
+                        </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-4">
                             <label for="dateJoined">Date Joined</label>
                             <input type="date"
                                    id="dateJoined"
                                    class="form-control"
                                    name="dateJoined"
                                    placeholder="Joined"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${doctor.dateJoined}"></span>
                         </div>
 
-                        <div class="form-group">
+                            <div class="col-md-4">
                             <label for="departmentId">Department</label>
                             <select class="form-select"
                                     name="departmentId"
@@ -87,10 +94,9 @@
                                         th:text="${department.name}">
                                 </option>
                             </select>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
                         </div>
 
-                        <div class="form-group">
+                            <div class="col-md-4">
                             <label for="isActive">Active</label>
                             <select class="form-select"
                                     name="isActive"
@@ -98,7 +104,7 @@
                                 <option th:value="true">Yes</option>
                                 <option th:value="false">No</option>
                             </select>
-
+                            </div>
                         </div>
 
                         <div class="form-group mt-2">

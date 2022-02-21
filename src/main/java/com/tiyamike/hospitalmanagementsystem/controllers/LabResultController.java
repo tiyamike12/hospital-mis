@@ -7,9 +7,11 @@ import com.tiyamike.hospitalmanagementsystem.services.LabResultService;
 import com.tiyamike.hospitalmanagementsystem.services.PatientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,14 +34,21 @@ public class LabResultController {
     }
 
     @GetMapping("/Create")
-    public String addLabResult(Model model){
+    public String addLabResult(LabResult labResult, Model model){
         List<Patient> patientList = patientService.getPatients();
         model.addAttribute("patients", patientList);
         return "lab_result/create";
     }
 
     @PostMapping("/Add")
-    public String saveLabResult(LabResult labResult, RedirectAttributes redirectAttributes){
+    public String saveLabResult(@Valid LabResult labResult, Errors errors,
+                                RedirectAttributes redirectAttributes,
+                                Model model){
+        if (errors.hasErrors()){
+            List<Patient> patientList = patientService.getPatients();
+            model.addAttribute("patients", patientList);
+            return "lab_result/create";
+        }
         labResultService.saveLabResult(labResult);
         redirectAttributes.addFlashAttribute("message", "Lab Result was created successfully!");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");
@@ -56,7 +65,11 @@ public class LabResultController {
     }
 
     @PostMapping("/Update")
-    public String updateLabResult(LabResult labResult, RedirectAttributes redirectAttributes){
+    public String updateLabResult(@Valid LabResult labResult, Errors errors,
+                                  RedirectAttributes redirectAttributes){
+        if (errors.hasErrors()){
+            return "lab_result/edit";
+        }
         labResultService.updateLabResult(labResult);
         redirectAttributes.addFlashAttribute("message", "Lab Result was updated successfully!");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");

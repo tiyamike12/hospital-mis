@@ -7,101 +7,108 @@
 </head>
 <body>
 <section layout:fragment="content">
-    <div class="container">
+    <div class="container px-4 mt-4">
+        <div class="row justify-content-center mb-2">
+            <div class="col">
+                <a class="btn btn-success float-end" role="button" th:href="@{/Doctors/All}">Doctors</a>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="login-form bg-light mt-4 p-4">
-
-                    <h4>Edit Doctor Record</h4>
-
-                    <form class="row g-3" method="POST" th:action="@{/Doctors/Update}">
+            <div class="card mb-4">
+                <div class="card-header">Edit Doctor Record</div>
+                <div class="card-body">
+                    <form method="POST" th:action="@{/Doctors/Update}" th:object="${doctor}">
 
                         <input type="hidden" name="id" th:field="${doctor.id}" class="form-control"/>
                         <input type="hidden" name="createdAt" th:field="${doctor.createdAt}" class="form-control"/>
 
-                        <div class="form-group">
-                            <label for="firstname">First Name</label>
-                            <input type="text"
-                                   name="firstname"
-                                   th:field="${doctor.firstname}"
-                                   id="firstname"
-                                   class="form-control"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="firstname">First Name</label>
+                                <input type="text"
+                                       name="firstname"
+                                       th:field="${doctor.firstname}"
+                                       id="firstname"
+                                       class="form-control"/>
+                                <span class="invalid" th:errors="${doctor.firstname}"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="lastname">Last Name</label>
+                                <input type="text"
+                                       id="lastname"
+                                       th:field="${doctor.lastname}"
+                                       class="form-control"
+                                       name="lastname"/>
+                                <span class="invalid" th:errors="${doctor.lastname}"></span>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="lastname">Last Name</label>
-                            <input type="text"
-                                   id="lastname"
-                                   th:field="${doctor.lastname}"
-                                   class="form-control"
-                                   name="lastname"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-4">
+                                <label for="email">Email</label>
+                                <input type="email"
+                                       id="email"
+                                       th:field="${doctor.email}"
+                                       class="form-control"
+                                       name="email"/>
+                                <span class="invalid" th:errors="${doctor.email}"></span>
+                            </div>
 
+                            <div class="col-md-4">
+                                <label for="phone">Phone</label>
+                                <input type="text"
+                                       id="phone"
+                                       th:field="${doctor.phone}"
+                                       class="form-control"
+                                       name="phone"/>
+                                <span class="invalid" th:errors="${doctor.phone}"></span>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="qualification">Qualification</label>
+                                <input type="text"
+                                       id="qualification"
+                                       th:field="${doctor.qualification}"
+                                       class="form-control"
+                                       name="qualification"/>
+                                <span class="invalid" th:errors="${doctor.qualification}"></span>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email"
-                                   id="email"
-                                   th:field="${doctor.email}"
-                                   class="form-control"
-                                   name="email"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
-                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-4">
+                                <label for="dateJoined">Date Joined</label>
+                                <input type="date"
+                                       id="dateJoined"
+                                       class="form-control"
+                                       th:field="${doctor.dateJoined}"
+                                       name="dateJoined"/>
+                                <span class="invalid" th:errors="${doctor.dateJoined}"></span>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="text"
-                                   id="phone"
-                                   th:field="${doctor.phone}"
-                                   class="form-control"
-                                   name="phone"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
-                        </div>
+                            <div class="col-md-4">
+                                <label for="departmentId">Department</label>
+                                <select class="form-select"
+                                        name="departmentId"
+                                        id="departmentId">
+                                    <option th:each="department : ${departments}"
+                                            th:value="${department.id}"
+                                            th:text="${department.name}">
+                                    </option>
+                                </select>
+                                <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="qualification">Qualification</label>
-                            <input type="text"
-                                   id="qualification"
-                                   th:field="${doctor.qualification}"
-                                   class="form-control"
-                                   name="qualification"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="dateJoined">Date Joined</label>
-                            <input type="date"
-                                   id="dateJoined"
-                                   class="form-control"
-                                   th:field="${doctor.dateJoined}"
-                                   name="dateJoined"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="departmentId">Department</label>
-                            <select class="form-select"
-                                    name="departmentId"
-                                    id="departmentId">
-                                <option th:each="department : ${departments}"
-                                        th:value="${department.id}"
-                                        th:text="${department.name}">
-                                </option>
-                            </select>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="isActive">Active</label>
-                            <select class="form-select"
-                                    name="isActive"
-                                    id="isActive">
-                                <option th:value="true">Yes</option>
-                                <option th:value="false">No</option>
-                            </select>
-
+                            <div class="col-md-4">
+                                <label for="isActive">Active</label>
+                                <select class="form-select"
+                                        name="isActive"
+                                        id="isActive">
+                                    <option th:value="true">Yes</option>
+                                    <option th:value="false">No</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="form-group mt-2">

@@ -6,9 +6,11 @@ import com.tiyamike.hospitalmanagementsystem.models.Patient;
 import com.tiyamike.hospitalmanagementsystem.services.PatientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,14 +32,20 @@ public class PatientController {
     }
 
     @GetMapping("/Create")
-    public String addPatient(Model model){
+    public String addPatient(Patient patient, Model model){
         model.addAttribute("gender", Gender.values());
         model.addAttribute("maritalStatuses", MaritalStatus.values());
         return "patient/create";
     }
 
     @PostMapping("/Add")
-    public String savePatient(Patient patient, RedirectAttributes redirectAttributes){
+    public String savePatient(@Valid Patient patient, Errors errors, Model model,
+                              RedirectAttributes redirectAttributes){
+        if (errors.hasErrors()){
+            model.addAttribute("gender", Gender.values());
+            model.addAttribute("maritalStatuses", MaritalStatus.values());
+            return "patient/create";
+        }
         patientService.savePatient(patient);
         redirectAttributes.addFlashAttribute("message", "Patient was created successfully!");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");
@@ -54,7 +62,13 @@ public class PatientController {
     }
 
     @PostMapping("/Update")
-    public String updatePatient(Patient patient, RedirectAttributes redirectAttributes){
+    public String updatePatient(@Valid Patient patient, Errors errors,
+                                Model model, RedirectAttributes redirectAttributes){
+        if (errors.hasErrors()){
+            model.addAttribute("gender", Gender.values());
+            model.addAttribute("maritalStatuses", MaritalStatus.values());
+            return "patient/edit";
+        }
         patientService.updatePatient(patient);
         redirectAttributes.addFlashAttribute("message", "Patient was updated successfully!");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");

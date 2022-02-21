@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.Date;
@@ -21,14 +22,15 @@ public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @NotNull(message = "First name is required")
+    @NotBlank(message = "First name is required")
     private String firstname;
-    @NotNull(message = "Last name is required")
+    @NotBlank(message = "Last name is required")
     private String lastname;
-    @Email
+    @Email(message = "Email is invalid")
     private String email;
+    @NotBlank(message = "Phone number is required")
     private String phone;
-    @NotNull(message = "Qualification is required")
+    @NotBlank(message = "Qualification is required")
     private String qualification;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateJoined;

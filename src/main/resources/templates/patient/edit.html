@@ -7,40 +7,45 @@
 </head>
 <body>
 <section layout:fragment="content">
-    <div class="container">
+    <div class="container px-4 mt-4">
+        <div class="row justify-content-center mb-2">
+            <div class="col">
+                <a class="btn btn-success float-end" role="button" th:href="@{/Patients/All}">Patients</a>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="login-form bg-light mt-4 p-4">
-
-                    <h4>Edit Patient Record</h4>
+            <div class="card mb-4">
+                <div class="card-header">Edit Patient Record</div>
+                <div class="card-body">
 
                     <form class="row g-3" method="POST" th:action="@{/Patients/Update}">
 
                         <input type="hidden" name="id" th:field="${patient.id}" class="form-control"/>
                         <input type="hidden" name="createdAt" th:field="${patient.createdAt}" class="form-control"/>
 
-                        <div class="form-group">
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-5">
                             <label for="firstname">First Name</label>
                             <input type="text"
                                    name="firstname"
                                    th:field="${patient.firstname}"
                                    id="firstname"
                                    class="form-control"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${patient.firstname}"></span>
                         </div>
 
-                        <div class="form-group">
+                            <div class="col-md-5">
                             <label for="lastname">Last Name</label>
                             <input type="text"
                                    id="lastname"
                                    th:field="${patient.lastname}"
                                    class="form-control"
                                    name="lastname"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${patient.lastname}"></span>
 
                         </div>
 
-                        <div class="form-group">
+                            <div class="col-md-2">
                             <label for="gender">Gender</label>
                             <select class="form-select"
                                     name="gender"
@@ -50,10 +55,11 @@
                                         th:text="${gender.name}">
                                 </option>
                             </select>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                        </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-3">
                             <label for="maritalStatus">Marital Status</label>
                             <select class="form-select"
                                     name="maritalStatus"
@@ -63,67 +69,71 @@
                                         th:text="${maritalStatus}">
                                 </option>
                             </select>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
                         </div>
 
-                        <div class="form-group">
+                            <div class="col-md-3">
                             <label for="dateOfBirth">Date of Birth</label>
                             <input type="date"
                                    id="dateOfBirth"
                                    class="form-control"
                                    name="dateOfBirth"
                                    th:field="${patient.dateOfBirth}">
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${patient.dateOfBirth}"></span>
                         </div>
 
-                        <div class="form-group">
+                            <div class="col-md-6">
                             <label for="email">Email</label>
                             <input type="email"
                                    id="email"
                                    th:field="${patient.email}"
                                    class="form-control"
                                    name="email"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${patient.email}"></span>
+                        </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
                             <label for="phone">Phone</label>
                             <input type="text"
                                    id="phone"
                                    th:field="${patient.phone}"
                                    class="form-control"
                                    name="phone"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${patient.phone}"></span>
                         </div>
 
-                        <div class="form-group">
+                            <div class="col-md-6">
                             <label for="address">Address</label>
                             <input type="text"
                                    id="address"
                                    th:field="${patient.address}"
                                    class="form-control"
                                    name="address"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${patient.address}"></span>
+                        </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
                             <label for="nextOfKinName">Next of Kin Name</label>
                             <input type="text"
                                    id="nextOfKinName"
                                    th:field="${patient.nextOfKinName}"
                                    class="form-control"
                                    name="nextOfKinName"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${patient.nextOfKinName}"></span>
                         </div>
 
-                        <div class="form-group">
+                            <div class="col-md-6">
                             <label for="nextOfKinPhone">Next of Kin Phone</label>
                             <input type="text"
                                    id="nextOfKinPhone"
                                    th:field="${patient.nextOfKinPhone}"
                                    class="form-control"
                                    name="nextOfKinPhone"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                                <span class="invalid" th:errors="${patient.nextOfKinPhone}"></span>
+                        </div>
                         </div>
 
                         <div class="form-group mt-2">

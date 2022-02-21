@@ -7,50 +7,52 @@
 </head>
 <body>
 <section layout:fragment="content">
-
-    <div class="container mt-md-5">
-        <div class="row justify-content-center mb-2">
+    <div class="container-xl px-4 mt-4">
+        <div class="row mb-2">
             <div class="col">
                 <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
-                <h3 class="float-start">Patients</h3>
+
                 <a class="btn btn-success float-end" role="button" th:href="@{/Patients/Create}">Add Patient Record</a>
             </div>
-        </div>
 
-        <div class="row justify-content-center">
-            <div class="col">
-                <table class="table table-bordered table-striped mt-2" id="table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Gender</th>
-                        <th>Date of Birth</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>Created Date</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="patient:${patients}">
-                        <td th:text="${patient.firstname} + ' ' + ${patient.lastname}"></td>
-                        <td th:text="${patient.gender}"></td>
-                        <td th:text="${#dates.format(patient.dateOfBirth, 'dd-MM-yyyy')}"></td>
-                        <td th:text="${patient.phone}"></td>
-                        <td th:text="${patient.email}"></td>
-                        <td th:text="${patient.address}"></td>
-                        <td th:text="${#dates.format(patient.createdAt, 'dd-MM-yyyy')}"></td>
-                        <td>
-                            <a class="btn btn-info" th:href="@{'/Patients/Edit/' + ${patient.id}}">Edit</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-danger" th:href="@{'/Patients/Delete/' + ${patient.id}}">Delete</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+        </div>
+        <div class="row" style="margin: auto">
+            <div class="card mb-4">
+                <div class="card-header">Patients</div>
+                <div class="card-body table-responsive">
+                    <table class="table table-bordered table-striped mt-2" id="table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Date of Birth</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Created Date</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="patient:${patients}">
+                            <td th:text="${patient.firstname} + ' ' + ${patient.lastname}"></td>
+                            <td th:text="${patient.gender}"></td>
+                            <td th:text="${#dates.format(patient.dateOfBirth, 'dd-MM-yyyy')}"></td>
+                            <td th:text="${patient.phone}"></td>
+                            <td th:text="${patient.email}"></td>
+                            <td th:text="${patient.address}"></td>
+                            <td th:text="${#dates.format(patient.createdAt, 'dd-MM-yyyy')}"></td>
+                            <td>
+                                <a class="btn btn-info" th:href="@{'/Patients/Edit/' + ${patient.id}}">Edit</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" th:href="@{'/Patients/Delete/' + ${patient.id}}">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

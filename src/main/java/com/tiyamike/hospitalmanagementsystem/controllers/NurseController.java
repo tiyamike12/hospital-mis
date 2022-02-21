@@ -1,14 +1,18 @@
 package com.tiyamike.hospitalmanagementsystem.controllers;
 
 import com.tiyamike.hospitalmanagementsystem.models.Department;
+import com.tiyamike.hospitalmanagementsystem.models.Gender;
+import com.tiyamike.hospitalmanagementsystem.models.MaritalStatus;
 import com.tiyamike.hospitalmanagementsystem.models.Nurse;
 import com.tiyamike.hospitalmanagementsystem.services.DepartmentService;
 import com.tiyamike.hospitalmanagementsystem.services.NurseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,14 +36,20 @@ public class NurseController {
     }
 
     @GetMapping("/Create")
-    public String addNurse(Model model){
+    public String addNurse(Nurse nurse, Model model){
         List<Department> departmentList = departmentService.getDepartments();
         model.addAttribute("departments", departmentList);
         return "nurse/create";
     }
 
     @PostMapping("/Add")
-    public String saveNurse(Nurse nurse, RedirectAttributes redirectAttributes){
+    public String saveNurse(@Valid Nurse nurse, Errors errors,
+                            RedirectAttributes redirectAttributes, Model model){
+        if (errors.hasErrors()){
+            List<Department> departmentList = departmentService.getDepartments();
+            model.addAttribute("departments", departmentList);
+            return "nurse/create";
+        }
         nurseService.saveNurse(nurse);
         redirectAttributes.addFlashAttribute("message", "Nurse was created successfully!");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");
@@ -56,7 +66,11 @@ public class NurseController {
     }
 
     @PostMapping("/Update")
-    public String updateNurse(Nurse nurse, RedirectAttributes redirectAttributes){
+    public String updateNurse(@Valid Nurse nurse, Errors errors,
+                              RedirectAttributes redirectAttributes){
+        if (errors.hasErrors()){
+            return "nurse/edit";
+        }
         nurseService.updateNurse(nurse);
         redirectAttributes.addFlashAttribute("message", "Nurse was updated successfully!");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");

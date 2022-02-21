@@ -7,57 +7,57 @@
 </head>
 <body>
 <section layout:fragment="content">
-
-    <div class="container mt-md-5">
-        <div class="row justify-content-center mb-2">
+    <div class="container-xl px-4 mt-4">
+        <div class="row mb-2">
             <div class="col">
                 <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
-                <h3 class="float-start">Doctors</h3>
                 <a class="btn btn-success float-end" role="button" th:href="@{/Doctors/Create}">Add Doctor Record</a>
             </div>
-        </div>
 
-        <div class="row justify-content-center">
-            <div class="col">
-                <table class="table table-bordered table-striped mt-2" id="table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Department</th>
-                        <th>Qualification</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Active</th>
-                        <th>Date Joined</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="doctor:${doctors}">
-                        <td th:text="${doctor.firstname} + ' ' + ${doctor.lastname}"></td>
-                        <td th:text="${doctor.department.name}"></td>
-                        <td th:text="${doctor.qualification}"></td>
-                        <td th:text="${doctor.phone}"></td>
-                        <td th:text="${doctor.email}"></td>
-                        <td>
-                            <span th:if="${doctor.isActive}" class="badge bg-success">Active</span>
-                            <span th:unless="${doctor.isActive}" class="badge bg-danger">Inactive</span>
-                        </td>
-                        <td th:text="${#dates.format(doctor.dateJoined, 'dd-MM-yyyy')}"></td>
-                        <td>
-                            <a class="btn btn-info" th:href="@{'/Doctors/Edit/' + ${doctor.id}}">Edit</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-danger" th:href="@{'/Doctors/Delete/' + ${doctor.id}}">Delete</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+        </div>
+        <div class="row" style="margin: auto">
+            <div class="card mb-4">
+                <div class="card-header">Doctors</div>
+                <div class="card-body table-responsive">
+                    <table class="table table-bordered table-striped mt-2" id="table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Qualification</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Active</th>
+                            <th>Date Joined</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="doctor:${doctors}">
+                            <td th:text="${doctor.firstname} + ' ' + ${doctor.lastname}"></td>
+                            <td th:text="${doctor.department.name}"></td>
+                            <td th:text="${doctor.qualification}"></td>
+                            <td th:text="${doctor.phone}"></td>
+                            <td th:text="${doctor.email}"></td>
+                            <td>
+                                <span th:if="${doctor.isActive}" class="badge bg-success">Active</span>
+                                <span th:unless="${doctor.isActive}" class="badge bg-danger">Inactive</span>
+                            </td>
+                            <td th:text="${#dates.format(doctor.dateJoined, 'dd-MM-yyyy')}"></td>
+                            <td>
+                                <a class="btn btn-info" th:href="@{'/Doctors/Edit/' + ${doctor.id}}">Edit</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" th:href="@{'/Doctors/Delete/' + ${doctor.id}}">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-
 </section>
 
 </body>

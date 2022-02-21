@@ -4,8 +4,11 @@ import com.tiyamike.hospitalmanagementsystem.models.AppUser;
 import com.tiyamike.hospitalmanagementsystem.services.AppUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,13 +29,18 @@ public class UserController {
     }
 
     @GetMapping("/Create")
-    public String addUser(){
+    public String addUser(AppUser appUser){
         return "users/create";
     }
 
     @PostMapping("/Add")
-    public String saveUser(AppUser appUser){
+    public String saveUser(@Valid AppUser appUser, Errors errors, RedirectAttributes redirectAttributes){
+        if (errors.hasErrors()){
+            return "users/create";
+        }
         appUserService.saveUser(appUser);
+        redirectAttributes.addFlashAttribute("message", "User was created successfully!");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
         return "redirect:/Users/All";
     }
 
@@ -43,15 +51,19 @@ public class UserController {
         return "users/edit";
     }
 
-    @PostMapping("/Update")
-    public String updateUser(AppUser appUser){
+    @RequestMapping(value = "/Update", method = {RequestMethod.PATCH, RequestMethod.POST})
+    public String updateUser(AppUser appUser, RedirectAttributes redirectAttributes){
         appUserService.updateUser(appUser);
+        redirectAttributes.addFlashAttribute("message", "User updated successfully!");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
         return "redirect:/Users/All";
     }
 
     @RequestMapping(value = "/Delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public String deleteUser(@PathVariable long id){
+    public String deleteUser(@PathVariable long id, RedirectAttributes redirectAttributes){
         appUserService.deleteUser(id);
+        redirectAttributes.addFlashAttribute("message", "User was deleted successfully!");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
         return "redirect:/Users/All";
     }
 }

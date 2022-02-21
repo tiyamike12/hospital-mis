@@ -7,44 +7,46 @@
 </head>
 <body>
 <section layout:fragment="content">
+    <div class="container-xl px-4 mt-4">
+        <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
 
-    <div class="container mt-md-5">
-        <div class="row justify-content-center mb-2">
-            <div class="col">
-                <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
-                <h3 class="float-start">Users</h3>
-                <a class="btn btn-success float-end" role="button" th:href="@{/Users/Create}">Add User</a>
+        <div class="row">
+            <div class="col-xl-2">
+                <a class="btn btn-success" th:href="@{/Users/Create}">Add User</a>
             </div>
-        </div>
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <div class="card-header">Users</div>
+                    <div class="card-body">
 
-        <div class="row justify-content-center">
-            <div class="col">
-                <table class="table table-bordered mt-2" id="table">
-                    <thead>
-                    <tr>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="user:${users}">
-                        <td th:text="${user.firstname}"></td>
-                        <td th:text="${user.lastname}"></td>
-                        <td th:text="${user.username}"></td>
-                        <td th:text="${user.email}"></td>
-                        <td>
-                            <a class="btn btn-warning" th:href="@{'/Users/Edit/' + ${user.id}}">Edit</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-danger" th:href="@{'/Users/Delete/' + ${user.id}}">Delete</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                        <table class="table table-bordered mt-2" id="table">
+                            <thead>
+                            <tr>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="user:${users}">
+                                <td th:text="${user.firstname}"></td>
+                                <td th:text="${user.lastname}"></td>
+                                <td th:text="${user.username}"></td>
+                                <td th:text="${user.email}"></td>
+                                <td>
+                                    <a class="btn btn-outline-info" th:href="@{'/Users/Edit/' + ${user.id}}">Edit</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-danger" th:href="@{'/Users/Delete/' + ${user.id}}">Delete</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

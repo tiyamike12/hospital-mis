@@ -7,53 +7,55 @@
 </head>
 <body>
 <section layout:fragment="content">
-
-    <div class="container mt-md-5">
-        <div class="row justify-content-center mb-2">
+    <div class="container-xl px-4 mt-4">
+        <div class="row mb-2">
             <div class="col">
                 <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
-                <h3 class="float-start">Lab Results</h3>
+
                 <a class="btn btn-success float-end" role="button" th:href="@{/LabResults/Create}">Add Lab Results</a>
             </div>
-        </div>
 
-        <div class="row justify-content-center">
-            <div class="col">
-                <table class="table table-bordered table-striped mt-2" id="table">
-                    <thead>
-                    <tr>
-                        <th>Test Name</th>
-                        <th>Test Date</th>
-                        <th>Patient</th>
-                        <th>Result</th>
-                        <th>Conducted By</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="labResult:${labResults}">
-                        <td th:text="${labResult.testName}"></td>
-                        <td th:text="${#dates.format(labResult.testDate, 'dd-MM-yyyy')}"></td>
-                        <td th:text="${labResult.patient.firstname} + ' ' + ${labResult.patient.lastname}"></td>
-                        <td>
-                            <span th:if="${labResult.result}" class="badge bg-danger">Positive</span>
-                            <span th:unless="${labResult.result}" class="badge bg-success">Negative</span>
-                        </td>
-                        <td th:text="${labResult.conductedBy}"></td>
-                        <td>
-                            <a class="btn btn-info" th:href="@{'/LabResults/Edit/' + ${labResult.id}}">Edit</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-danger" th:href="@{'/LabResults/Delete/' + ${labResult.id}}">Delete</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+        </div>
+        <div class="row" style="margin: auto">
+            <div class="card mb-4">
+                <div class="card-header">Lab Results</div>
+                <div class="card-body table-responsive">
+                    <table class="table table-bordered table-striped mt-2" id="table">
+                        <thead>
+                        <tr>
+                            <th>Test Name</th>
+                            <th>Test Date</th>
+                            <th>Patient</th>
+                            <th>Result</th>
+                            <th>Conducted By</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="labResult:${labResults}">
+                            <td th:text="${labResult.testName}"></td>
+                            <td th:text="${#dates.format(labResult.testDate, 'dd-MM-yyyy')}"></td>
+                            <td th:text="${labResult.patient.firstname} + ' ' + ${labResult.patient.lastname}"></td>
+                            <td>
+                                <span th:if="${labResult.result}" class="badge bg-danger">Positive</span>
+                                <span th:unless="${labResult.result}" class="badge bg-success">Negative</span>
+                            </td>
+                            <td th:text="${labResult.conductedBy}"></td>
+                            <td>
+                                <a class="btn btn-info" th:href="@{'/LabResults/Edit/' + ${labResult.id}}">Edit</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger"
+                                   th:href="@{'/LabResults/Delete/' + ${labResult.id}}">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-
 </section>
 
 </body>

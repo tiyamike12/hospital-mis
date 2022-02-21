@@ -5,7 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
@@ -16,8 +17,9 @@ public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @NotNull
+    @NotBlank(message = "Code is required")
+    @Size(max = 4, min = 3)
     private String code;
-    @NotNull
+    @NotBlank(message = "Department field is required")
     private String name;
 }

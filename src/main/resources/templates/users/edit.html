@@ -7,29 +7,41 @@
 </head>
 <body>
 <section layout:fragment="content">
-    <div class="container">
+    <div class="container-xl px-4 mt-4">
+        <div class="row justify-content-center mb-2">
+            <div class="col">
+                <a class="btn btn-success float-end" role="button" th:href="@{/Users/All}">Users</a>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="login-form bg-light mt-4 p-4">
+        <div class="card mb-4">
+            <div class="card-header">Account Details</div>
+            <div class="card-body">
+                <form method="POST" th:action="@{/Users/Update}" th:object="${appUser}">
+                    <input type="hidden" name="id" th:field="${user.id}" class="form-control"/>
 
-                    <h4>Edit an account</h4>
+                    <div class="mb-3">
+                        <label for="username">Username</label>
+                        <input type="text"
+                               id="username"
+                               th:field="${user.username}"
+                               class="form-control"
+                               name="username"
+                               placeholder="Username"/>
+                        <span class="invalid" th:errors="${appUser.username}"></span>
+                    </div>
 
-                    <form class="row g-3" method="POST" th:action="@{/Users/Update}">
-
-                        <input type="hidden" name="id" th:field="${user.id}" class="form-control"/>
-
-                        <div class="form-group">
+                    <div class="row gx-3 mb-3">
+                        <div class="col-md-6">
                             <label for="firstname">First Name</label>
                             <input type="text"
                                    name="firstname"
                                    th:field="${user.firstname}"
                                    id="firstname"
-                                   placeholder="First name"
                                    class="form-control"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                            <span class="invalid" th:errors="${appUser.firstname}"></span>
                         </div>
-
-                        <div class="form-group">
+                        <div class="col-md-6">
                             <label for="lastname">Last Name</label>
                             <input type="text"
                                    id="lastname"
@@ -37,52 +49,31 @@
                                    class="form-control"
                                    name="lastname"
                                    placeholder="Last name"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
+                            <span class="invalid" th:errors="${appUser.lastname}"></span>
 
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text"
-                                   id="username"
-                                   th:field="${user.username}"
-                                   class="form-control"
-                                   name="username"
-                                   placeholder="Username"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
 
-                        </div>
+                    <div class="mb-3">
+                        <label for="email">Email</label>
+                        <input type="email"
+                               id="email"
+                               th:field="${user.email}"
+                               class="form-control"
+                               name="email"
+                               placeholder="Email"/>
+                        <span class="invalid" th:errors="${appUser.email}"></span>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email"
-                                   id="email"
-                                   th:field="${user.email}"
-                                   class="form-control"
-                                   name="email"
-                                   placeholder="Email"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
-                        </div>
+                    <div class="form-group mt-2">
+                        <button class="btn btn-primary btn-block" type="submit">Update User</button>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="text"
-                                   id="password"
-                                   th:field="${user.password}"
-                                   class="form-control"
-                                   name="password"
-                                   placeholder="Password"/>
-                            <span style="color: #dc3545;width: 100%; margin-top: 0.25rem; font-size: 80%;"></span>
-                        </div>
-
-                        <div class="form-group mt-2">
-                            <button class="btn btn-primary btn-block" type="submit">Update User</button>
-                        </div>
-
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 </section>
 
