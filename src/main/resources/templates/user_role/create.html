@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base.html}">
+<head>
+    <title>User Roles | Create</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container px-4 mt-4">
+        <div class="row justify-content-center mb-2">
+            <div class="col">
+                <a class="btn btn-success float-end" role="button" th:href="@{/UserRoles/All}">User Roles</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card mb-4">
+                <div class="card-header">Create User Role</div>
+                <div class="card-body">
+
+                    <form method="POST" th:action="@{/UserRoles/Add}" th:object="${userRole}">
+
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="userId">User</label>
+                                <select class="form-select"
+                                        name="userId"
+                                        id="userId">
+                                    <option th:each="user : ${users}"
+                                            th:value="${user.id}"
+                                            th:text="${user.firstname} + ' ' + ${user.lastname}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="roleId">Role</label>
+                                <select class="form-select"
+                                        name="roleId"
+                                        id="roleId">
+                                    <option th:each="role : ${roles}"
+                                            th:value="${role.id}"
+                                            th:text="${role.name}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <button class="btn btn-primary btn-block" type="submit">Add User Role</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

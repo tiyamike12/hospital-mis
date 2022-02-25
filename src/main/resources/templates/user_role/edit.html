@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base.html}">
+<head>
+    <title>Edit Patient Case</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container px-4 mt-4">
+        <div class="row justify-content-center mb-2">
+            <div class="col">
+                <a class="btn btn-success float-end" role="button" th:href="@{/PatientCases/All}">Patient Cases</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card mb-4">
+                <div class="card-header">Edit Patient Case Record</div>
+                <div class="card-body">
+
+                    <form method="POST" th:action="@{/PatientCases/Update}">
+
+                        <input type="hidden" name="id" th:field="${patientCase.id}" class="form-control"/>
+                        <input type="hidden" name="createdAt" th:field="${patientCase.createdAt}" class="form-control"/>
+
+                        <div class="mb-3">
+                            <label for="diagnosis">Diagnosis</label>
+                            <input type="text"
+                                   name="diagnosis"
+                                   id="diagnosis"
+                                   th:field="${patientCase.diagnosis}"
+                                   class="form-control"/>
+                            <span class="invalid" th:errors="${patientCase.diagnosis}"></span>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="caseDate">Case Date</label>
+                                <input type="date"
+                                       id="caseDate"
+                                       class="form-control"
+                                       th:field="${patientCase.caseDate}"
+                                       name="caseDate"/>
+                                <span class="invalid" th:errors="${patientCase.caseDate}"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="patientId">Patient</label>
+                                <select class="form-select"
+                                        name="patientId"
+                                        id="patientId">
+                                    <option th:each="patient : ${patients}"
+                                            th:value="${patient.id}"
+                                            th:text="${patient.firstname} + ' ' + ${patient.lastname}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="treatment">Treatment</label>
+                            <input type="text"
+                                   id="treatment"
+                                   class="form-control"
+                                   name="treatment"
+                                   th:field="${patientCase.treatment}"/>
+                            <span class="invalid" th:errors="${patientCase.treatment}"></span>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <button class="btn btn-primary btn-block" type="submit">Update Patient Case Record</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

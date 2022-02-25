@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base.html}" xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <title>Roles</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container-xl px-4 mt-4">
+
+        <div class="row">
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <div class="card-header">Roles</div>
+                    <div class="card-body">
+
+                        <table class="table table-bordered mt-2" id="table">
+                            <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Role Name</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="role:${roles}">
+                                <td th:text="${role.id}"></td>
+                                <td th:text="${role.name}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

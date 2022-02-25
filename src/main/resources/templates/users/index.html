@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{base.html}">
+      layout:decorate="~{base.html}" xmlns:sec="http://www.thymeleaf.org">
 <head>
     <title>Users</title>
 </head>
@@ -26,6 +26,7 @@
                                 <th>Lastname</th>
                                 <th>Username</th>
                                 <th>Email</th>
+                                <th>Roles</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
@@ -36,6 +37,10 @@
                                 <td th:text="${user.lastname}"></td>
                                 <td th:text="${user.username}"></td>
                                 <td th:text="${user.email}"></td>
+                                <td th:each="role:${user.roles}">
+                                    <span th:if="${role.name}" th:text="${role.name}"></span>
+                                    <span th:unless="${user.roles}" class="badge bg-danger">No Role assigned</span>
+                                </td>
                                 <td>
                                     <a class="btn btn-outline-info" th:href="@{'/Users/Edit/' + ${user.id}}">Edit</a>
                                 </td>

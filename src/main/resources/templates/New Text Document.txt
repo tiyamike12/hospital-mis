@@ -4,3 +4,5 @@ occupation
 spouse name
 nextofkin /Emerge contact
 phone
+
+th:href="@{'/Departments/Delete/' + ${department.id}}"

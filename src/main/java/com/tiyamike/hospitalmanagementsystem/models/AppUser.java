@@ -31,4 +31,9 @@ public class AppUser {
     @NotNull
     @Size(min = 4, max = 30)
     private String lastname;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "roleId"))
+    private Set<Role> roles;
 }

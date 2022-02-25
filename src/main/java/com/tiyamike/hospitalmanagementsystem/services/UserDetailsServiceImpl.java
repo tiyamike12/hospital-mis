@@ -1,6 +1,7 @@
 package com.tiyamike.hospitalmanagementsystem.services;
 
 import com.tiyamike.hospitalmanagementsystem.models.AppUser;
+import com.tiyamike.hospitalmanagementsystem.models.Role;
 import com.tiyamike.hospitalmanagementsystem.repositories.AppUserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,10 +31,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return new User(
                 user.getUsername(), user.getPassword(), true,
                 true, true, true,
-                getAuthorities());
+                getAuthorities(user));
     }
 
-    private Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("USER"));
+    private Collection<? extends GrantedAuthority> getAuthorities(AppUser appUser) {
+        Set<Role> roles = appUser.getRoles();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+        for (Role role : roles){
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        return authorities;
     }
 }

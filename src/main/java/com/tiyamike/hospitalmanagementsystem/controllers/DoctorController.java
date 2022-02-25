@@ -41,8 +41,11 @@ public class DoctorController {
     }
 
     @PostMapping("/Add")
-    public String saveDoctor(@Valid Doctor doctor, Errors errors, RedirectAttributes redirectAttributes){
+    public String saveDoctor(@Valid Doctor doctor, Errors errors,
+                             Model model, RedirectAttributes redirectAttributes){
         if (errors.hasErrors()){
+            List<Department> departmentList = departmentService.getDepartments();
+            model.addAttribute("departments", departmentList);
             return "doctor/create";
         }
         doctorService.saveDoctor(doctor);

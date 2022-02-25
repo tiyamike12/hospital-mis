@@ -25,6 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
+                .antMatchers("/").hasAuthority("system-administrator")
+                .antMatchers("/Users/**").hasAuthority("system-administrator")
                 .antMatchers("/Auth/**", "/css/**", "/js/**",
                         "/fontawesome/**", "/DataTables/**")
                 .permitAll()
@@ -38,7 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
-                .permitAll();
+                .permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/error");
 
     }
 

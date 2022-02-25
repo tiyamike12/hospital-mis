@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base.html}">
+<head>
+    <title>User Roles</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container px-4 mt-4">
+        <div class="row justify-content-center mb-2">
+            <div class="col">
+                <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
+                <a class="btn btn-success float-end" role="button" th:href="@{/UserRoles/Create}">Create User
+                    Role</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card mb-4">
+                <div class="card-header">User Roles</div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped mt-2" id="table">
+                        <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Role</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="userRole:${userRoles}">
+                            <td th:text="${userRole.userId}"></td>
+                            <td th:text="${userRole.roleId}"></td>
+                            <td>
+                                <a class="btn btn-info"
+                                   th:href="@{'/UserRoles/Edit/' + ${userRole.id}}">Edit</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger"
+                                   th:href="@{'/UserRoles/Delete/' + ${userRole.id}}">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

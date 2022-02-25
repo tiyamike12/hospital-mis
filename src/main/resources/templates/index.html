@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{base.html}">
 <head>
@@ -8,7 +9,7 @@
 <body>
 <section layout:fragment="content">
 
-
+<span sec:authentication="principal.authorities">Roles</span>
 
 </section>
 
