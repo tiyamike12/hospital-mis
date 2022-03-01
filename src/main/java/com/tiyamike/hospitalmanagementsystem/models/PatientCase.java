@@ -27,6 +27,10 @@ public class PatientCase {
     @ManyToOne
     @JoinColumn(name = "patientId", insertable = false, updatable = false)
     private Patient patient;
+    private long doctorId;
+    @ManyToOne
+    @JoinColumn(name = "doctorId", insertable = false, updatable = false)
+    private Doctor doctor;
     @NotBlank(message = "Treatment is required")
     private String treatment;
     private Instant createdAt;

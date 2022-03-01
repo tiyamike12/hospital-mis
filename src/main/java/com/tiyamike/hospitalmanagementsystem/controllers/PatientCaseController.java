@@ -1,8 +1,9 @@
 package com.tiyamike.hospitalmanagementsystem.controllers;
 
-import com.tiyamike.hospitalmanagementsystem.models.LabResult;
+import com.tiyamike.hospitalmanagementsystem.models.Doctor;
 import com.tiyamike.hospitalmanagementsystem.models.Patient;
 import com.tiyamike.hospitalmanagementsystem.models.PatientCase;
+import com.tiyamike.hospitalmanagementsystem.services.DoctorService;
 import com.tiyamike.hospitalmanagementsystem.services.PatientCaseService;
 import com.tiyamike.hospitalmanagementsystem.services.PatientService;
 import org.springframework.stereotype.Controller;
@@ -20,10 +21,12 @@ import java.util.Optional;
 public class PatientCaseController {
     private final PatientCaseService patientCaseService;
     private final PatientService patientService;
+    private final DoctorService doctorService;
 
-    public PatientCaseController(PatientCaseService patientCaseService, PatientService patientService) {
+    public PatientCaseController(PatientCaseService patientCaseService, PatientService patientService, DoctorService doctorService) {
         this.patientCaseService = patientCaseService;
         this.patientService = patientService;
+        this.doctorService = doctorService;
     }
 
     @GetMapping("/All")
@@ -36,7 +39,9 @@ public class PatientCaseController {
     @GetMapping("/Create")
     public String addPatientCase(PatientCase patientCase, Model model){
         List<Patient> patientList = patientService.getPatients();
+        List<Doctor> doctorList = doctorService.getDoctors();
         model.addAttribute("patients", patientList);
+        model.addAttribute("doctors", doctorList);
         return "patient_case/create";
     }
 
@@ -46,7 +51,9 @@ public class PatientCaseController {
                                   Model model){
         if (errors.hasErrors()){
             List<Patient> patientList = patientService.getPatients();
+            List<Doctor> doctorList = doctorService.getDoctors();
             model.addAttribute("patients", patientList);
+            model.addAttribute("doctors", doctorList);
             return "patient_case/create";
         }
         patientCaseService.savePatientCase(patientCase);
@@ -59,7 +66,9 @@ public class PatientCaseController {
     public String editPatientCase(Model model, @PathVariable("id") long id){
         Optional<PatientCase> patientCase = patientCaseService.findById(id);
         List<Patient> patientList = patientService.getPatients();
+        List<Doctor> doctorList = doctorService.getDoctors();
         model.addAttribute("patients", patientList);
+        model.addAttribute("doctors", doctorList);
         model.addAttribute("patientCase", patientCase);
         return "patient_case/edit";
     }

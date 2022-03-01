@@ -23,17 +23,18 @@
                         <input type="hidden" name="id" th:field="${patientCase.id}" class="form-control"/>
                         <input type="hidden" name="createdAt" th:field="${patientCase.createdAt}" class="form-control"/>
 
-                        <div class="mb-3">
-                            <label for="diagnosis">Diagnosis</label>
-                            <input type="text"
-                                   name="diagnosis"
-                                   id="diagnosis"
-                                   th:field="${patientCase.diagnosis}"
-                                   class="form-control"/>
-                            <span class="invalid" th:errors="${patientCase.diagnosis}"></span>
-                        </div>
-
                         <div class="row gx-3 mb-3">
+
+                            <div class="col-md-9">
+                                <label for="diagnosis">Diagnosis</label>
+                                <input type="text"
+                                       name="diagnosis"
+                                       id="diagnosis"
+                                       th:field="${patientCase.diagnosis}"
+                                       class="form-control"/>
+                                <span class="invalid" th:errors="${patientCase.diagnosis}"></span>
+                            </div>
+
                             <div class="col-md-6">
                                 <label for="caseDate">Case Date</label>
                                 <input type="date"
@@ -43,6 +44,9 @@
                                        name="caseDate"/>
                                 <span class="invalid" th:errors="${patientCase.caseDate}"></span>
                             </div>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
 
                             <div class="col-md-6">
                                 <label for="patientId">Patient</label>
@@ -52,6 +56,18 @@
                                     <option th:each="patient : ${patients}"
                                             th:value="${patient.id}"
                                             th:text="${patient.firstname} + ' ' + ${patient.lastname}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="doctorId">Doctor</label>
+                                <select class="form-select"
+                                        name="doctorId"
+                                        id="doctorId">
+                                    <option th:each="doctor : ${doctors}"
+                                            th:value="${doctor.id}"
+                                            th:text="${doctor.firstname} + ' ' + ${doctor.lastname}">
                                     </option>
                                 </select>
                             </div>

@@ -28,7 +28,7 @@
                                class="form-control"
                                name="username"
                                placeholder="Username"/>
-                        <span class="invalid" th:errors="${appUser.username}"></span>
+                        <span class="invalid" th:errors="${user.username}"></span>
                     </div>
 
                     <div class="row gx-3 mb-3">
@@ -39,7 +39,7 @@
                                    th:field="${user.firstname}"
                                    id="firstname"
                                    class="form-control"/>
-                            <span class="invalid" th:errors="${appUser.firstname}"></span>
+                            <span class="invalid" th:errors="${user.firstname}"></span>
                         </div>
                         <div class="col-md-6">
                             <label for="lastname">Last Name</label>
@@ -49,7 +49,7 @@
                                    class="form-control"
                                    name="lastname"
                                    placeholder="Last name"/>
-                            <span class="invalid" th:errors="${appUser.lastname}"></span>
+                            <span class="invalid" th:errors="${user.lastname}"></span>
 
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                                class="form-control"
                                name="email"
                                placeholder="Email"/>
-                        <span class="invalid" th:errors="${appUser.email}"></span>
+                        <span class="invalid" th:errors="${user.email}"></span>
                     </div>
 
                     <div class="form-group mt-2">
