@@ -4,12 +4,17 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{base.html}">
 <head>
-        <title>Home</title>
+    <title>Home</title>
 </head>
 <body>
 <section layout:fragment="content">
 
-<span sec:authentication="principal.authorities">Roles</span>
+    <span sec:authentication="principal.authorities">Roles</span>
+    <div class="container">
+
+        <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
+
+    </div>
 
 </section>
 

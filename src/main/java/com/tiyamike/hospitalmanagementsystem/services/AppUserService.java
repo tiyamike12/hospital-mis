@@ -27,6 +27,10 @@ public class AppUserService {
         appUserRepository.save(appUser);
     }
 
+    public void updateUserPassword(AppUser appUser){
+        appUserRepository.save(appUser);
+    }
+
     public List<AppUser> getUsers(){
         return appUserRepository.findAll();
     }
@@ -43,4 +47,11 @@ public class AppUserService {
         appUserRepository.deleteById(id);
     }
 
+    public AppUser getUserByUsername(String username) {
+        return appUserRepository.findAppUserByUsername(username);
+    }
+
+    public AppUser findUserByUserId(long id) {
+        return appUserRepository.findAppUserById(id);
+    }
 }

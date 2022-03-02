@@ -51,9 +51,17 @@ public class UserController {
         return "users/edit";
     }
 
-    @RequestMapping(value = "/Update", method = {RequestMethod.PATCH, RequestMethod.POST})
-    public String updateUser(AppUser appUser, RedirectAttributes redirectAttributes){
-        appUserService.updateUser(appUser);
+    @PostMapping( "/Update")
+    public String updateUser(@RequestParam("username") String username, @RequestParam("firstname") String firstname,
+                             @RequestParam("lastname") String lastname, @RequestParam("email") String email,
+                             @RequestParam("id") long id, RedirectAttributes redirectAttributes){
+        AppUser appUser = appUserService.findUserByUserId(id);
+        appUser.setUsername(username);
+        appUser.setFirstname(firstname);
+        appUser.setLastname(lastname);
+        appUser.setEmail(email);
+        appUserService.saveUser(appUser);
+
         redirectAttributes.addFlashAttribute("message", "User updated successfully!");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");
         return "redirect:/Users/All";

@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @Controller
 public class HomeController {
-
     private final AppUserRepository appUserRepository;
 
     public HomeController(AppUserRepository appUserRepository) {

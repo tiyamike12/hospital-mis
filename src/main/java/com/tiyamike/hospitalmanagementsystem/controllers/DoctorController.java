@@ -17,7 +17,6 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/Doctors")
 public class DoctorController {
-
     private final DoctorService doctorService;
     private final DepartmentService departmentService;
 

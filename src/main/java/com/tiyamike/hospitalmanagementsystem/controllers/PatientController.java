@@ -17,7 +17,6 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/Patients")
 public class PatientController {
-
     private final PatientService patientService;
 
     public PatientController(PatientService patientService) {

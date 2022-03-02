@@ -19,7 +19,6 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/Nurses")
 public class NurseController {
-
     private final NurseService nurseService;
     private final DepartmentService departmentService;
 
@@ -29,14 +28,14 @@ public class NurseController {
     }
 
     @GetMapping("/All")
-    public String getAllNurses(Model model){
+    public String getAllNurses(Model model) {
         List<Nurse> nurseList = nurseService.getNurses();
         model.addAttribute("nurses", nurseList);
         return "nurse/index";
     }
 
     @GetMapping("/Create")
-    public String addNurse(Nurse nurse, Model model){
+    public String addNurse(Nurse nurse, Model model) {
         List<Department> departmentList = departmentService.getDepartments();
         model.addAttribute("departments", departmentList);
         return "nurse/create";
@@ -44,8 +43,8 @@ public class NurseController {
 
     @PostMapping("/Add")
     public String saveNurse(@Valid Nurse nurse, Errors errors,
-                            RedirectAttributes redirectAttributes, Model model){
-        if (errors.hasErrors()){
+                            RedirectAttributes redirectAttributes, Model model) {
+        if (errors.hasErrors()) {
             List<Department> departmentList = departmentService.getDepartments();
             model.addAttribute("departments", departmentList);
             return "nurse/create";
@@ -57,7 +56,7 @@ public class NurseController {
     }
 
     @GetMapping("/Edit/{id}")
-    public String editNurse(Model model, @PathVariable("id") long id){
+    public String editNurse(Model model, @PathVariable("id") long id) {
         Optional<Nurse> nurse = nurseService.findById(id);
         List<Department> departmentList = departmentService.getDepartments();
         model.addAttribute("departments", departmentList);
@@ -67,8 +66,8 @@ public class NurseController {
 
     @PostMapping("/Update")
     public String updateNurse(@Valid Nurse nurse, Errors errors,
-                              RedirectAttributes redirectAttributes){
-        if (errors.hasErrors()){
+                              RedirectAttributes redirectAttributes) {
+        if (errors.hasErrors()) {
             return "nurse/edit";
         }
         nurseService.updateNurse(nurse);
@@ -78,7 +77,7 @@ public class NurseController {
     }
 
     @RequestMapping(value = "/Delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public String deleteNurse(@PathVariable long id, RedirectAttributes redirectAttributes){
+    public String deleteNurse(@PathVariable long id, RedirectAttributes redirectAttributes) {
         nurseService.deleteNurse(id);
         redirectAttributes.addFlashAttribute("message", "Nurse was removed successfully!");
         redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
